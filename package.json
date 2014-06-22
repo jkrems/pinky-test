@@ -4,7 +4,7 @@
   "description": "Promise-first test runner",
   "main": "pinky.js",
   "scripts": {
-    "test": "./cli.js"
+    "test": "./cli.js && coffee ./test/test.coffee"
   },
   "bin": "cli.js",
   "repository": {
@@ -21,5 +21,8 @@
     "bluebird": "^2.1.3",
     "format-error": "^1.0.0",
     "glob": "^4.0.2"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.7.1"
   }
 }

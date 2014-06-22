@@ -34,6 +34,10 @@ pinky('my test suite', [
 Or, coffee-script style:
 
 ```coffee
+assert = require 'assert'
+
+Bluebird = require 'bluebird'
+
 { pinky, swear } = require 'pinky-test'
 
 pinky 'my test suite', [
@@ -49,13 +53,16 @@ pinky 'my test suite', [
       assert.equal 'foo', 'foo'
 
     swear 'nested naming is ok', ->
-      Bluebird.reject(new Error 'Functions returning promises are ok')
+      if process.env.FORCE_FAIL
+        Bluebird.reject(new Error 'Functions returning promises are ok')
+      else
+        # everything should be fine
 
     swear 'mocha-style done', (done) ->
       setTimeout done, 100
   ]
 
   # promises are totally fine
-  Bluebird.reject(new Error 'Something terrible happened')
-]);
+  Bluebird.resolve('Any value here')
+]
 ```
