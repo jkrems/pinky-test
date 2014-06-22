@@ -164,5 +164,6 @@ pinky.report = function(err, results) {
 
 module.exports = pinky;
 module.exports.default = pinky;
+module.exports.pinky = pinky;
 module.exports.swear = swear;
 module.exports.printResults = printResults;
