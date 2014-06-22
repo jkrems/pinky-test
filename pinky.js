@@ -1,6 +1,7 @@
 'use strict';
 
 var Bluebird = require('bluebird');
+var assert = require('assertive');
 var formatError = require('format-error').format;
 
 var pendingResultion = [];
@@ -161,6 +162,26 @@ pinky.report = function(err, results) {
     process.exit(0);
   }
 };
+
+function wrapAssertProp(fnName) {
+  var assertFn = assert[fnName];
+  if (typeof assertFn !== 'function') return;
+  swear[fnName] = function() {
+    var args = Array.prototype.slice.call(arguments);
+    var result = Bluebird.all(args).spread(assert[fnName]);
+    if (args.length === assertFn.length + 1) {
+      return swear(args[0], result);
+    } else {
+      return swear(makePinkyDesc(new Error().stack), result);
+    }
+  };
+}
+
+for (var fnName in assert) {
+  if (assert.hasOwnProperty(fnName)) {
+    wrapAssertProp(fnName);
+  }
+}
 
 module.exports = pinky;
 module.exports.default = pinky;

@@ -11,14 +11,14 @@ pinky 'my test suite', [
   swear 'single test', ->
     assert.equal true, true
 
+  swear.equal 13, 13
+
   swear ->
     # description is optional, defaults to index in array
 
   myBeforeBlock().then (preparedValue) ->
     swear 'test grouping', [
-      swear 'can use the "before" value', ->
-        # this will use a default description as well
-        assert.equal 'foo', preparedValue
+      swear.equal 'can use the "before" value', 'foo', preparedValue
 
       swear 'nested naming is ok', ->
         if process.env.FORCE_FAIL
