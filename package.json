@@ -1,6 +1,6 @@
 {
   "name": "pinky-test",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Promise-first test runner",
   "main": "pinky.js",
   "scripts": {
